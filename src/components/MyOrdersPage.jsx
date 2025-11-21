@@ -237,7 +237,7 @@ export function MyOrdersPage() {
           onClick={() => setSelectedOrder(null)} // Close modal on backdrop click
         >
           <div
-            className="bg-white w-[27%] h-[60vh] max-w-none rounded-2xl p-6 shadow-xl overflow-y-auto"
+            className="bg-white w-[28%] max-w- rounded-2xl p-6 shadow-xl overflow-y-auto"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
           >
             {/* Modal Header */}

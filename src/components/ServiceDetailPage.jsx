@@ -483,7 +483,7 @@ export default function ServiceDetailPage() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       {/* Hero */}
       <div className="bg-white">
         {/* Hero Section */}
@@ -512,8 +512,15 @@ export default function ServiceDetailPage() {
                 </div>
 
                 {/* Tagline */}
-                <p className="text-[#A7D7C5] uppercase tracking-widest text-sm">
+                <p className="text-[#708238] uppercase tracking-widest text-sm">
                   {service.tagline}
+                </p>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl drop-shadow-lg">
+                  {service.name}
+                </h1>
+
+                <p className="opacity-90 text-base sm:text-lg lg:text-xl drop-shadow-md leading-relaxed">
+                  {service.description}
                 </p>
 
                 {/* Title */}
@@ -540,11 +547,11 @@ export default function ServiceDetailPage() {
               </div>
 
               {/* RIGHT HERO IMAGE */}
-              <img
+              {/* <img
                 src={service.heroImage}
                 alt={service.name}
                 className="rounded-3xl shadow-2xl border-4 border-white/20 h-[430px] w-full object-cover"
-              />
+              /> */}
             </div>
           </div>
         </section>
@@ -586,9 +593,9 @@ export default function ServiceDetailPage() {
       {/* What We Offer */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-6 text-center mb-12">
-          <p className="text-[#708238] uppercase mb-2">What we offer</p>
-          <h2 className="text-[#708238] text-2xl mb-2">Choose What You Need</h2>
-          <p className="text-[#5a5a5a]">Select services and check pricing</p>
+          <p className="text-[#556B2F] uppercase tracking-wider mb-2 text-xs sm:text-sm">What we offer</p>
+          <h2 className="text-[#3A4D47] text-2xl sm:text-3xl mb-2">Choose What You Need</h2>
+          <p className="text-[#5a5a5a] text-sm sm:text-base">Click any card to see full details</p>
         </div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -635,40 +642,52 @@ export default function ServiceDetailPage() {
                     {qty === 0 ? (
                       <button
                         onClick={() => updateQuantity(svc.id, 1)}
-                        className="w-full bg-[#708238] text-white py-3 rounded-full font-medium"
+                        className="w-full bg-[#708238] text-white py-2 rounded-full font-medium"
                       >
                         + Add
                       </button>
                     ) : (
-                      <div className="flex items-center gap-3 bg-[#708238] rounded-full py-2 px-4 w-full justify-center">
+                      <div className="flex items-center justify-between w-full px-4 py-2 
+                    bg-black/40 backdrop-blur-md rounded-full">
+
+                        {/* Minus Button */}
                         <button
                           onClick={() => updateQuantity(svc.id, -1)}
-                          className="bg-white text-[#708238] w-8 h-8 rounded-full flex items-center justify-center font-bold"
+                          className="w-10 h-10 flex items-center justify-center 
+                   rounded-full bg-white/20 backdrop-blur-md
+                   text-white text-xl font-bold"
                         >
-                          -
+                          –
                         </button>
 
-                        <div className="bg-gray-100 text-[#708238] w-8 h-8 rounded-full flex items-center justify-center font-semibold shadow">
+                        {/* Quantity */}
+                        <div className="text-white font-semibold text-lg w-10 text-center">
                           {qty}
                         </div>
 
+                        {/* Plus Button */}
                         <button
                           onClick={() => updateQuantity(svc.id, 1)}
-                          className="bg-white text-[#708238] w-8 h-8 rounded-full flex items-center justify-center font-bold"
+                          className="w-10 h-10 flex items-center justify-center 
+                   rounded-full bg-white/20 backdrop-blur-md
+                   text-white text-xl font-bold"
                         >
                           +
                         </button>
+
+
                       </div>
                     )}
                   </div>
 
+
                   {/* INFO BUTTON */}
                   <button
                     onClick={() => setLearnMoreService(svc)}
-                    className="px-6 py-4 rounded-full border-2 border-gray-300 text-white 
+                    className="px-4 py-2 rounded-full border-2 border-gray-300 text-white 
              bg-transparent hover:bg-gray-200/30 transition-colors"
                   >
-                    <Info size={18} />
+                    <Info size={14} className="sm:w-4 sm:h-4" />
                   </button>
                 </div>
 

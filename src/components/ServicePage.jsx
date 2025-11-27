@@ -108,7 +108,7 @@ export function ServicesPage() {
                 <div className="absolute top-4 right-4 w-16 h-16 rounded-full bg-white/90 shadow-md flex items-center justify-center">
                   <Icon size={32} className="text-[#708238]" />
                 </div>
-                <div className="absolute bottom-4 left-4 text-4xl">
+                <div className="absolute bottom-6 right-6 text-4xl z-20 pointer-events-none">
                   {service.emoji}
                 </div>
 

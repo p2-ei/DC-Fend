@@ -170,11 +170,11 @@ export default function ServiceDetailPage() {
             <ul className="space-y-2">
               {selectedServices.map((s) => (
                 <li
-                  key={s.id}
+                  key={s?.id}
                   className="flex justify-between bg-white border p-3 rounded-lg shadow-sm"
                 >
                   <span>{s.name}</span>
-                  <span className="font-semibold text-olive">₹{s.price}</span>
+                  <span className="font-semibold text-olive">₹{s.price || "no price found" }</span>
                 </li>
               ))}
             </ul>

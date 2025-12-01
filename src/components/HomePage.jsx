@@ -230,23 +230,23 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20">
           <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[500px]">
             <div className="space-y-6 text-white">
               <div className="text-6xl">{current.emoji}</div>
               <h1 className="text-4xl font-bold">{current.name}</h1>
               <p className="text-white/90 text-xl">{current.description}</p>
               <div className="flex gap-4 flex-wrap">
-                <Link
+                {/* <Link
                   to={`/service/${current.id}`}
                   className="bg-[#708238] text-white px-8 py-4 rounded-full hover:bg-[#5a6e31] transition-all duration-300"
                 >
                   Learn More
-                </Link>
+                </Link> */}
                 <Link
                   to="/booking"
                   state={{ selectedService: current.id }}
-                  className="bg-white text-[#708238] px-8 py-4 rounded-full hover:bg-[#F6F6F6] transition-all duration-300 border-2 border-white"
+                  className="bg-white text-[#708238] px-8 py-4 rounded-full hover:bg-[#708238] transition-all duration-300 border-2 border-white"
                 >
                   Book Now
                 </Link>
@@ -277,9 +277,8 @@ export default function HomePage() {
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`h-3 rounded-full ${
-                    index === currentSlide ? "w-8 bg-white" : "w-3 bg-white/40"
-                  }`}
+                  className={`h-3 rounded-full ${index === currentSlide ? "w-8 bg-white" : "w-3 bg-white/40"
+                    }`}
                 />
               ))}
             </div>
@@ -319,14 +318,21 @@ export default function HomePage() {
             })}
           </div>
         </div>
-</section>
+      </section>
 
       {/* SERVICES GRID */}
       <section className="py-16 bg-[#F6F6F6]">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-center text-3xl font-bold text-[#708238] mb-10">
+
+          {/* Heading */}
+          <h2 className="text-center text-[#3A4D47] mb-4 text-2xl sm:text-3xl">
             Our Services
           </h2>
+          <p className="text-center text-[#5a5a5a] text-sm sm:text-base">
+            Click to explore
+          </p>
+
+          {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {servicesData.map((s) => (
               <Link
@@ -334,22 +340,31 @@ export default function HomePage() {
                 to={`/service/${s.id}`}
                 className="group relative h-80 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all"
               >
-                {/* Full Background Image */}
-                <ImageWithFallback
-                  src={s.heroImage}
+                {/* Background Image */}
+                <img
+                  src={s.backgroundImage}
                   alt={s.name}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
 
-                {/* Overlay (dark gradient for readability) */}
+                {/* Dark Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-                {/* Text Overlay */}
+                {/* Top Row: Emoji + Price */}
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <span className="text-3xl">{s.emoji}</span>
+                </div>
+
+                {/* <div className="absolute top-4 right-4 bg-[#708238] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+                  ${s.price}
+                </div> */}
+
+                {/* Bottom Text */}
                 <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <div className="text-4xl mb-2">{s.emoji}</div>
                   <h3 className="text-xl font-semibold mb-1">{s.name}</h3>
-                  <p className="text-sm opacity-90 mb-2">{s.description}</p>
-                  <span className="text-[#B7E4C7] inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                  {/* <p className="text-sm opacity-90 mb-2">{s.description}</p> */}
+
+                  <span className="text-[#708238]  inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                     View Details →
                   </span>
                 </div>
@@ -358,7 +373,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+      
       <Footer />
     </div>
   );

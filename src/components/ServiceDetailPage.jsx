@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import {servicesData} from "../data/ServicesData";
+import { useState, useEffect } from "react";
+import { servicesData } from "../data/ServicesData";
 import {
   Package,
   FileText,
@@ -430,14 +430,14 @@ const iconMap = {
   truck: Truck,
   cross: Cross,
   car: Car,
-  file:File,
+  file: File,
 };
 
 // ===================== Component =====================
 export default function ServiceDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const service = servicesData.find((s) => s.id === id);
+  const service = servicesData?.find((s) => s?.id === id);
   const [selectedServices, setSelectedServices] = useState({});
   const [learnMoreService, setLearnMoreService] = useState(null);
 
@@ -445,6 +445,7 @@ export default function ServiceDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Service not found</p>
+        <p className="text-gray-600">The service you’re trying to view does not exist.</p>
       </div>
     );
 
@@ -469,9 +470,9 @@ export default function ServiceDetailPage() {
   // // const handleProceedToBook = () => navigate("/book");
   // const handleProceedToBook = () => navigate("/booking"); 
 
- // Add logic for navigate tio booking page
+  // Add logic for navigate tio booking page
   const totalItems = Object.values(selectedServices).reduce((a, b) => a + b, 0);
- 
+
   const handleProceedToBook = () => {
     navigate("/booking", {
       state: {
@@ -483,50 +484,80 @@ export default function ServiceDetailPage() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       {/* Hero */}
-      <section
-        className="relative py-18 lg:py-20 overflow-hidden"
-        style={{
-          backgroundImage: `url(${service.backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                  <ServiceIcon size={36} />
+      <div className="bg-white">
+        {/* Hero Section */}
+        <section
+          className="relative py-28 lg:py-32 overflow-hidden"
+          style={{
+            backgroundImage: service?.backgroundImage ? `url(${service.backgroundImage})` : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60" />
+
+          <div className="relative max-w-7xl mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+              {/* LEFT CONTENT */}
+              <div className="text-white space-y-5">
+                {/* Icons Row */}
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <ServiceIcon size={36} className="text-white" />
+                  </div>
+                  <span className="text-6xl">{service.emoji}</span>
                 </div>
-                <span className="text-5xl">{service.emoji}</span>
+
+                {/* Tagline */}
+                <p className="text-[#708238] uppercase tracking-widest text-sm">
+                  {service?.tagline || "no tagline"}
+                </p>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl drop-shadow-lg">
+                  {service?.name || "Unnamed Service"}
+                </h1>
+
+                <p className="opacity-90 text-base sm:text-lg lg:text-xl drop-shadow-md leading-relaxed">
+                  {service?.description ?? "No description available"}
+                </p>
+
+                {/* Title */}
+                <div className="mt-6">
+                  <div className="bg-[#556B2F] text-white p-6 md:p-8 rounded-3xl shadow-xl border border-white/20 max-w-lg">
+
+                    {/* Title */}
+                    <p className="text-sm opacity-90">Complete Package</p>
+
+                    {/* Price + /service */}
+                    <div className="flex items-end gap-2 mt-1">
+                      <p className="text-5xl font-bold leading-none">${service?.packagePrice || 0}</p>
+                      <span className="text-lg opacity-90 mb-1">/ service</span>
+                    </div>
+
+                    {/* Includes Text */}
+                    <p className="text-sm mt-4 opacity-90 leading-relaxed">
+                      Includes: {service.includes.join(", ")}
+                    </p>
+
+                  </div>
+                </div>
+
               </div>
-              <p className="text-[#A7D7C5] uppercase tracking-wider">
-                {service.tagline}
-              </p>
-              <h1 className="text-4xl font-bold">{service.name}</h1>
-              <p className="opacity-90 text-lg">{service.description}</p>
 
-              {/* Minimal Package Info */}
-              <p className="text-sm text-gray-200 mt-4">
-                Package:{" "}
-                <span className="text-[#708238] font-semibold">
-                  ${service.packagePrice}
-                </span>{" "}
-                (Complete Support)
-              </p>
+              {/* RIGHT HERO IMAGE */}
+              {/* <img
+                src={service.heroImage}
+                alt={service.name}
+                className="rounded-3xl shadow-2xl border-4 border-white/20 h-[430px] w-full object-cover"
+              /> */}
             </div>
-
-            <img
-              src={service.heroImage}
-              alt={service.name}
-              className="rounded-3xl shadow-2xl border-4 border-white/20 h-[400px] object-cover"
-            />
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
+
 
       {/* Banner */}
       <section className="bg-[#708238] py-6 text-white">
@@ -559,11 +590,13 @@ export default function ServiceDetailPage() {
       </section>
 
       {/* What We Offer */}
+
+      {/* What We Offer */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-6 text-center mb-12">
-          <p className="text-[#708238] uppercase mb-2">What we offer</p>
-          <h2 className="text-[#708238] text-2xl mb-2">Choose What You Need</h2>
-          <p className="text-[#5a5a5a]">Select services and check pricing</p>
+          <p className="text-[#556B2F] uppercase tracking-wider mb-2 text-xs sm:text-sm">What we offer</p>
+          <h2 className="text-[#3A4D47] text-2xl sm:text-3xl mb-2">Choose What You Need</h2>
+          <p className="text-[#5a5a5a] text-sm sm:text-base">Click any card to see full details</p>
         </div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -578,8 +611,8 @@ export default function ServiceDetailPage() {
               >
                 {/* IMAGE */}
                 <img
-                  src={svc.image}
-                  alt={svc.name}
+                  src={svc?.image || fallbackImage}
+                  alt={svc?.name ?? "Unknown services"}
                   className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                 />
 
@@ -588,7 +621,7 @@ export default function ServiceDetailPage() {
 
                 {/* PRICE BADGE */}
                 <div className="absolute top-4 left-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-[#708238] shadow">
-                  ${svc.price}
+                  ${svc?.price || 0}
                 </div>
 
                 {/* ICON TOP RIGHT */}
@@ -598,8 +631,8 @@ export default function ServiceDetailPage() {
 
                 {/* TITLE + DESCRIPTION */}
                 <div className="absolute bottom-20 left-4 right-4 text-white">
-                  <h3 className="text-lg font-bold">{svc.name}</h3>
-                  <p className="text-sm opacity-90">{svc.description}</p>
+                  <h3 className="text-lg font-bold">{svc?.name ?? "Unknown name"}</h3>
+                  <p className="text-sm opacity-90">{svc?.description || "No description"}</p>
                 </div>
 
                 {/* ADD / QTY SECTION */}
@@ -610,40 +643,52 @@ export default function ServiceDetailPage() {
                     {qty === 0 ? (
                       <button
                         onClick={() => updateQuantity(svc.id, 1)}
-                        className="w-full bg-[#708238] text-white py-3 rounded-full font-medium"
+                        className="w-full bg-[#708238] text-white py-2 rounded-full font-medium"
                       >
                         + Add
                       </button>
                     ) : (
-                      <div className="flex items-center gap-3 bg-[#708238] rounded-full py-2 px-4 w-full justify-center">
+                      <div className="flex items-center justify-between w-full px-4 py-2 
+                    bg-black/40 backdrop-blur-md rounded-full">
+
+                        {/* Minus Button */}
                         <button
                           onClick={() => updateQuantity(svc.id, -1)}
-                          className="bg-white text-[#708238] w-8 h-8 rounded-full flex items-center justify-center font-bold"
+                          className="w-10 h-10 flex items-center justify-center 
+                   rounded-full bg-white/20 backdrop-blur-md
+                   text-white text-xl font-bold"
                         >
-                          -
+                          –
                         </button>
 
-                        <div className="bg-gray-100 text-[#708238] w-8 h-8 rounded-full flex items-center justify-center font-semibold shadow">
+                        {/* Quantity */}
+                        <div className="text-white font-semibold text-lg w-10 text-center">
                           {qty}
                         </div>
 
+                        {/* Plus Button */}
                         <button
                           onClick={() => updateQuantity(svc.id, 1)}
-                          className="bg-white text-[#708238] w-8 h-8 rounded-full flex items-center justify-center font-bold"
+                          className="w-10 h-10 flex items-center justify-center 
+                   rounded-full bg-white/20 backdrop-blur-md
+                   text-white text-xl font-bold"
                         >
                           +
                         </button>
+
+
                       </div>
                     )}
                   </div>
 
+
                   {/* INFO BUTTON */}
                   <button
                     onClick={() => setLearnMoreService(svc)}
-                    className="px-6 py-4 rounded-full border-2 border-gray-300 text-white 
+                    className="px-4 py-2 rounded-full border-2 border-gray-300 text-white 
              bg-transparent hover:bg-gray-200/30 transition-colors"
                   >
-                    <Info size={18} />
+                    <Info size={14} className="sm:w-4 sm:h-4" />
                   </button>
                 </div>
 
@@ -652,6 +697,35 @@ export default function ServiceDetailPage() {
 
             );
           })}
+        </div>
+      </section>
+
+
+
+      {/* How It Works */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-2xl font-semibold text-[#3A4D47] mb-2">
+            How It Works
+          </h2>
+          <p className="text-[#5a5a5a] mb-10">
+            Follow these simple steps to get started!
+          </p>
+          <div className="grid md:grid-cols-4 gap-6">
+            {service.steps.map((s, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-gray-100 rounded-3xl p-6 shadow hover:shadow-lg"
+              >
+                <div className="text-4xl mb-3">{i + 1}️⃣</div>
+                <h3 className="font-semibold text-[#3A4D47] mb-1">{s.title}</h3>
+                <p className="text-[#5a5a5a] text-sm">{s.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -671,7 +745,7 @@ export default function ServiceDetailPage() {
               </div>
               <button
                 onClick={handleProceedToBook}
-                className="bg-[#708238] text-white px-8 py-4 rounded-full hover:bg-[#5a8e8b] transition-colors shadow-lg text-lg w-full sm:w-auto"
+                className="bg-[#708238] text-white px-8 py-4 rounded-full hover:bg-[#708238] transition-colors shadow-lg text-lg w-full sm:w-auto"
               >
                 Proceed to Book
               </button>

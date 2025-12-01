@@ -119,7 +119,7 @@ export function BookingPage() {
  
   return (
     <div className="bg-white">
-      <div className="bg-white py-8 sm:py-12 min-height-screen">
+      <div className="bg-white py-8 sm:py-12 min-h-screen">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
             <h1 className="text-[#556B2F] text-3xl mb-2">Book Your Service</h1>
@@ -246,9 +246,9 @@ export function BookingPage() {
                                       onClick={() =>
                                         updateQuantity(internal.id, 1)
                                       }
-                                      className="bg-[#556B2F] text-white px-3 py-1 rounded-full text-sm"
+                                      className="bg-[#708328] text-white px-3 py-1 rounded-full text-sm hover:bg-[#708328] transition-colors"
                                     >
-                                      <Plus size={14} /> Add
+                                      <Plus size={14} className="inline mr-1 sm:w-[14px] sm:h-[14px]" /> Add
                                     </button>
                                   ) : (
                                     <div className="flex items-center gap-2 bg-white rounded-full px-2 py-1">
@@ -259,7 +259,7 @@ export function BookingPage() {
                                         }
                                         className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center"
                                       >
-                                        <Minus size={12} />
+                                        <Minus size={12} className="inline mr-1 sm:w-[14px] sm:h-[14px]" />
                                       </button>
  
                                       <span className="text-[#556B2F] text-sm">
@@ -438,7 +438,7 @@ export function BookingPage() {
                     <button
                       type="button"
                       onClick={() => setCurrentStep(currentStep - 1)}
-                      className="flex-1 border-2 border-[#556B2F] text-[#556B2F] px-6 py-4 rounded-full"
+                      className="flex-1 bg-white text-[#556B2F] border-2 border-[#556B2F] px-6 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <ChevronLeft /> Back
                     </button>
@@ -449,14 +449,14 @@ export function BookingPage() {
                       type="button"
                       disabled={!canProceed()}
                       onClick={() => setCurrentStep(currentStep + 1)}
-                      className="flex-1 bg-[#556B2F] text-white px-6 py-4 rounded-full disabled:opacity-50"
+                      className="flex-1 bg-[#556B2F] text-white px-6 py-4 rounded-full hover:bg-[#4a5f28] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
                       Next <ChevronRight />
                     </button>
                   ) : (
                     <button
                       type="submit"
-                      className="flex-1 bg-[#556B2F] text-white px-8 py-5 rounded-full text-xl"
+                      className="flex-1 bg-[#556B2F] text-white px-8 py-5 rounded-full hover:bg-[#4a5f28] transition-all duration-300 shadow-lg text-xl"
                     >
                       Confirm Booking
                     </button>

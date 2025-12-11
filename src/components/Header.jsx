@@ -9,7 +9,7 @@ export default function Header() {
           DS
         </div>
         <div>
-          <h1 className="text-xl font-semibold text-gray-900">Desi Service</h1>
+          <h1 className="text-xl font-semibold text-gray-900">NRI buddy</h1>
           <p className="text-sm text-gray-500">Community · Local Services</p>
         </div>
       </div>

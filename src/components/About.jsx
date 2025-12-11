@@ -1,5 +1,5 @@
-import React from 'react'
-import Footer from './Footer';
+import React from "react";
+import Footer from "./Footer";
 
 export default function About() {
   return (
@@ -7,7 +7,7 @@ export default function About() {
       <div className="bg-gradient-to-r from-gray-50 to-white p-8 rounded-xl">
         <div className="flex gap-10">
           <div className="flex-1">
-            <h2 className="text-2xl font-bold">About Desi Service</h2>
+            <h2 className="text-2xl font-bold">About NRI buddy</h2>
             <p className="mt-4 text-gray-600 max-w-lg">
               We connect you with verified local professionals. Built for the
               community — reliable, transparent pricing, trusted reviews.

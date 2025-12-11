@@ -22,7 +22,7 @@ export function Navigation() {
             <div className="w-10 h-10 rounded-full bg-[#708238] flex items-center justify-center shadow-md">
               <span className="text-white">DS</span>
             </div>
-            <span className="text-[#708238]">Desi Service</span>
+            <span className="text-[#708238]">NRI buddy</span>
           </Link>
 
           {/* Desktop Navigation */}

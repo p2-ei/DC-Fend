@@ -56,7 +56,7 @@ export function MyOrdersPage() {
       totalSteps: 4,
       proofImages: [
         "https://www.shutterstock.com/image-photo/delivery-man-transport-black-box-600nw-2310803529.jpg",
-        "https://5.imimg.com/data5/SELLER/Default/2024/2/383445715/RF/AE/DO/207612801/international-door-to-door-courier-services-500x500.jpeg"
+        "https://5.imimg.com/data5/SELLER/Default/2024/2/383445715/RF/AE/DO/207612801/international-door-to-door-courier-services-500x500.jpeg",
       ],
     },
     {
@@ -72,7 +72,7 @@ export function MyOrdersPage() {
       totalSteps: 4,
       proofImages: [
         "https://img.freepik.com/free-photo/personal-shopper-with-mask-working_23-2148924109.jpg?semt=ais_hybrid&w=740&q=80",
-        "https://img.freepik.com/premium-photo/shopaholic-woman-shopping-new-wardrobe-looking-shirt-fabric-modern-boutique-african-american-couple-buying-fashionable-clothes-checking-hangers-with-casual-wear-clothing-store_482257-72229.jpg?semt=ais_hybrid&w=740&q=80"
+        "https://img.freepik.com/premium-photo/shopaholic-woman-shopping-new-wardrobe-looking-shirt-fabric-modern-boutique-african-american-couple-buying-fashionable-clothes-checking-hangers-with-casual-wear-clothing-store_482257-72229.jpg?semt=ais_hybrid&w=740&q=80",
       ],
     },
   ];
@@ -96,7 +96,10 @@ export function MyOrdersPage() {
 
   // Image navigation inside modal
   const nextImage = () => {
-    if (currentOrder && currentImageIndex < currentOrder.proofImages.length - 1) {
+    if (
+      currentOrder &&
+      currentImageIndex < currentOrder.proofImages.length - 1
+    ) {
       setCurrentImageIndex((i) => i + 1);
     }
   };
@@ -234,11 +237,24 @@ export function MyOrdersPage() {
       {currentOrder && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
-          onClick={() => setSelectedOrder(null)} // Close modal on backdrop click
+          onClick={() => setSelectedOrder(null)}
         >
           <div
-            className="bg-white w-[28%] max-w- rounded-2xl p-6 shadow-xl overflow-y-auto"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+            className="
+        bg-white 
+        w-11/12            /*  ~ 91% width on mobile */
+        sm:w-3/4           /*  ~ 75% on small screens and up */
+        md:w-1/2           /*  ~ 50% on medium screens and up */
+        lg:w-1/3           /*  ~ 33% on large & up — similar to your 28% but fluid */
+        max-h-[90vh]       /* limit height so it’s not taller than viewport */
+        rounded-2xl 
+        p-4 sm:p-6 
+        shadow-xl 
+        overflow-y-auto   /* allow inner scrolling if content is tall */
+      "
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
           >
             {/* Modal Header */}
             <div className="flex justify-between items-center mb-4">
@@ -311,10 +327,11 @@ export function MyOrdersPage() {
                         <button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
-                          className={`h-2 rounded-full transition-all ${index === currentImageIndex
+                          className={`h-2 rounded-full transition-all ${
+                            index === currentImageIndex
                               ? "w-8 bg-[#556B2F]"
                               : "w-2 bg-gray-300"
-                            }`}
+                          }`}
                           aria-label={`Show image ${index + 1}`}
                         />
                       ))}
@@ -331,7 +348,6 @@ export function MyOrdersPage() {
           </div>
         </div>
       )}
-
 
       {/* Footer */}
       <Footer />

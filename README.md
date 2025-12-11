@@ -1,4 +1,4 @@
-# Desi Service (Vite + React + Tailwind)
+# NRI buddy (Vite + React + Tailwind)
 
 ## Setup
 
@@ -10,6 +10,8 @@ npm run dev
 Then open http://localhost:5173
 
 ## Description
-This is a **desktop-only static UI** for Desi Service built using:
+
+This is a **desktop-only static UI** for NRI buddy built using:
+
 - React + Vite
 - Tailwind CSS

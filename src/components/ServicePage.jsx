@@ -120,7 +120,7 @@ export function ServicesPage() {
                   <p className="text-sm opacity-90 mb-2">
                     {service.description}
                   </p>
-                  <div className="inline-flex items-center gap-2 text-[#F5EBDD] group-hover:gap-3 transition-all">
+                  <div className="inline-flex items-center gap-2 text-[#708238] group-hover:gap-3 transition-all">
                     <span>Learn More</span>
                     <span>→</span>
                   </div>

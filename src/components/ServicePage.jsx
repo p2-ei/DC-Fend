@@ -117,7 +117,7 @@ export function ServicesPage() {
                   <h3 className="text-2xl font-semibold mb-1">
                     {service.name}
                   </h3>
-                  <p className="text-sm opacity-90 mb-2">
+                  <p className="text-sm mb-2">
                     {service.description}
                   </p>
                   <div className="inline-flex items-center gap-2 text-[#708238] group-hover:gap-3 transition-all">
